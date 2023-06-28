@@ -10,6 +10,17 @@ $(document).ready(function() {
   var typewriterElements = document.querySelectorAll('.typewriter-effect')
   for (var i = 0; i < typewriterElements.length; i++) {
     var currentEl = typewriterElements[i]
+    var innerText = currentEl.innerText
+    new Typewriter(currentEl, {
+      loop: true,
+    })
+      .typeString(innerText)
+      .pauseFor(1000)
+      .start()
   }
 
+  // power glitch
+  PowerGlitch.glitch('.glitch', {
+    hideOverflow: true
+  })
 });
