@@ -48,4 +48,40 @@ $(document).ready(function() {
         .text(diff + " days since last error")
         .addClass(textClass)
     })
+  
+    // listen for submit events on the signup form
+    var signupForm = document.getElementById('signup-form')
+
+    signupForm.addEventListener('submit', function(event) {
+      event.preventDefault()
+      var emailInput = document.getElementById('email')
+      var email = emailInput.value.trim()
+      // create a user using JSON placeholder API POST
+      fetch('https://jsonplaceholder.typicode.com/users', {
+        method: 'POST',
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+        body: JSON.stringify({ email: email })
+      })
+      
+    
+    .then(function(response) {
+      console.log(response);
+
+      if (response.ok && response.status === 201) {
+
+        window.location.assign('./signup-thankyou.html?email=' + email)
+      } else {
+        alert("something went wrong")
+      }
+      // if successful 
+        // redirect to the signup-thankyou.html?email=<email_here> (window.location)
+      })
+      .catch(function(error) {
+        alert("error")
+      })
+    
+    })  
+  
   });
